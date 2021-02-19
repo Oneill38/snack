@@ -17,7 +17,7 @@ COPY packages/snack-sdk/package.json packages/snack-sdk/tsconfig.json ./
 WORKDIR /app/snackager
 COPY snackager/jest ./jest
 COPY snackager/src ./src
-# COPY snackager/structure-tests ./
+COPY snackager/structure-tests ./structure-tests
 COPY snackager/package.json ./
 COPY snackager/tsconfig*.json ./
 COPY snackager/.prettier* snackager/.eslint* ./

@@ -40,7 +40,7 @@ profiles:
     test:
       - image: gcr.io/exponentjs/snackager
         structureTests:
-          - ./structure-tests/cli.yaml
+          - snackager/structure-tests/cli.yaml
     activation:
       - env: CI=true
   - name: main

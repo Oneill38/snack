@@ -34,20 +34,22 @@ WORKDIR /app/snackager
 
 CMD ["yarn", "start"]
 
-FROM dev as builder
+FROM dev as build
 
 # Build
 RUN yarn run build
 
-# clear development dependencies
+# Remove development dependencies
 RUN yarn install --frozen-lockfile --offline --production
 
 FROM mhart/alpine-node:${node_version}
 
 RUN apk --no-cache add git openssh-client
 
-COPY --from=builder /app/snackager/package.json ./
-COPY --from=builder /app/snackager/build build
-COPY --from=builder /app/node_modules node_modules
+# Get built code and dependencies
+COPY --from=build /app/snackager/package.json ./
+COPY --from=build /app/snackager/build build
+COPY --from=build /app/node_modules node_modules
 
-CMD ["node", "--max-old-space-size=8192", "."]
+# Start
+CMD ["node", "--max-old-space-size=8192", "--async-stack-traces", "."]

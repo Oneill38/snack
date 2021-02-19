@@ -21,7 +21,6 @@ type Config = {
   };
   cloudfront: { url: string };
   api: { url: string };
-  instrumentationEnabled: boolean;
   sentry?: { dsn: string };
 };
 
@@ -61,12 +60,9 @@ const config: Config = {
   api: {
     url: env('API_SERVER_URL'),
   },
-  instrumentationEnabled: false,
 };
 
-if (!process.env.DISABLE_INSTRUMENTATION) {
-  config.instrumentationEnabled = true;
-
+if (process.env.NODE_ENV === 'production') {
   config.sentry = {
     dsn: env('SENTRY_DSN'),
   };

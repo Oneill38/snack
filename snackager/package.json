@@ -74,12 +74,11 @@
     "typescript": "^4.1.4"
   },
   "scripts": {
-    "start": "ts-node-dev --require tsconfig-paths/register --inspect=9212 src/index.ts | node_modules/.bin/bunyan",
-    "start-prod": "direnv exec .direnv/production node_modules/.bin/tsnd --require tsconfig-paths/register --inspect=9212 src/index.ts | node_modules/.bin/bunyan",
+    "start": "env-cmd -e development tsnd --require tsconfig-paths/register --inspect=9212 src/index.ts | node_modules/.bin/bunyan",
     "build": "tsc --project tsconfig.build.json",
     "debug": "kubectl.1.15 --context=minikube port-forward deploy/snackager 9229",
-    "test": "NODE_ENV=test node --async-stack-traces node_modules/.bin/jest --config jest/unit.config.js",
-    "bundle": "NODE_ENV=test tsnd --quiet --async-stack-traces -- src/cli.ts",
+    "test": "env-cmd -e test node --async-stack-traces node_modules/.bin/jest --config jest/unit.config.js",
+    "bundle": "env-cmd -e test tsnd --quiet --async-stack-traces -- src/cli.ts",
     "lint": "eslint ./src"
   },
   "volta": {

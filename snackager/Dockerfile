@@ -19,7 +19,7 @@ COPY snackager/jest ./jest
 COPY snackager/src ./src
 # COPY snackager/structure-tests ./
 COPY snackager/package.json ./
-COPY snackager/tsconfig*.json snackager/dev-server.sh ./
+COPY snackager/tsconfig*.json ./
 COPY snackager/.prettier* snackager/.eslint* ./
 
 # Install dependencies
@@ -46,8 +46,8 @@ FROM mhart/alpine-node:${node_version}
 
 RUN apk --no-cache add git openssh-client
 
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/build build
+COPY --from=builder /app/snackager/package.json ./
+COPY --from=builder /app/snackager/build build
 COPY --from=builder /app/node_modules node_modules
 
 CMD ["node", "--max-old-space-size=8192", "."]

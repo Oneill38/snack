@@ -12,6 +12,10 @@ module.exports = (async function () {
   const stagingSecrets = await GetEnvVars({
     envFile: { filePath: './k8s/staging/secrets/snackager.env' },
   });
+  if (!stagingSecrets.REDIS_URL) {
+    console.error('Secrets are locked, unable to start Snackager');
+    throw new Error('Secrets are locked.');
+  }
   return {
     development: {
       NODE_ENV: 'development',

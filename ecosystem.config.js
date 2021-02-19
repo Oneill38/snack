@@ -18,5 +18,12 @@ module.exports = {
       interpreter_args: '--inspect=9220',
       cwd: 'packages/snack-proxies',
     },
+    {
+      name: 'snackager',
+      script: `./src/index.ts`,
+      interpreter,
+      interpreter_args: '--require tsconfig-paths/register --inspect=9212',
+      cwd: 'snackager',
+    },
   ],
 };

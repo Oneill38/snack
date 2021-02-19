@@ -19,14 +19,25 @@ Run `yarn start` from the root to start the Snack development services.
 
 ```
 ┌─ Process List ──────────────────────────────────────┐┌──  exp-web-proxy Logs  ──────
-│[ 2] exp-web-proxy   Mem: 217 MB  CPU:   0 %  online ││ exp-web-proxy > Listening ...
-│[ 1] exp-www-proxy   Mem: 228 MB  CPU:   0 %  online ││                              
+│[ 2] snack-proxies   Mem: 217 MB  CPU:   0 %  online ││ snack-proxies > Listening ...
+│[ 1] snackager       Mem: 228 MB  CPU:   0 %  online ││                              
 │[ 0] snack-website   Mem: 501 MB  CPU: 128 %  online ││                              
 ```
 
 > Some services like the Expo API server and the Expo website are hosted elsewhere and are proxied. The proxies log all incoming requests and auto-redirect to locally running instances when possible. 
 
 To view the website, open http://snack.expo.test or http://localhost:3011.
+
+### Snackager bundler
+
+All contributors can [test package bundling](./snackager/README#test-package-bundling) and [run the tests](./snackager/README#run-tests). It is currently only possible for Expo developers to run the full Snackager server, which requires access to API keys. *We are working on making this possible for external contributors.*
+
+To run the Snackager server locally, uncomment the following line in `.envrc` and re-run `direnv allow` (requires `unlock`-ed repository).
+
+```
+# Uncomment to run snackager (requires unlocked secrets)
+snackager
+```
 
 ## ✅ Testing
 

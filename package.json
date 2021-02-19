@@ -9,14 +9,15 @@
   },
   "scripts": {
     "start": "yarn domain && env-cmd -f website/deploy/development/snack.env pm2 start ecosystem.config.js && pm2 monit && yarn stop",
-    "stop": "pm2 stop ecosystem.config.js",
+    "stop": "pm2 stop ecosystem.config.js && pm2 kill",
     "domain": "chalet start && chalet add http://localhost:3011 -n snack.expo -f && chalet add http://localhost:3021 -n expo -f"
   },
   "workspaces": [
     "packages/snack-sdk",
     "packages/snack-babel-standalone",
     "packages/snack-proxies",
-    "website"
+    "website",
+    "snackager"
   ],
   "devDependencies": {
     "chalet": "^0.9.0",
